@@ -12,6 +12,7 @@ public class Main {
 	
 	//Import file using scanner object. 
 	Scanner wordFrequencyHistogram = null;
+	BinaryTree bst = new BinaryTree();
 	int i = 0;
 	
 	try{
@@ -24,21 +25,14 @@ public class Main {
 		while(wfh.hasNext()){
 			String s = wfh.next();	
 			Node leaf = new Node(s);
-			leaves[i] = leaf;
+			/*leaves[i] = leaf;
 			i++;
+			*/
+			System.out.println(leaf.getData());
+			bst.add(leaf);
 			
 		}
 	}
-	System.out.println(wordCount);
-	System.out.println(" ");
-	
-	for(i = 0; i < leaves.length; i++){
-		System.out.println(leaves[i].getData());
-		
-	}
-	
-	
-	
 	
 	
 	}

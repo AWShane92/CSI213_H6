@@ -4,17 +4,17 @@ public class Node {
 	
 	//Properties
 		private String data;
+		private int counter;
 		private Node left;
 		private Node right;
-		
-		
 		
 		//Constructors
 		public Node(String data){
 			
-			this.left = null;
 			this.data = data;
+			this.left = null;
 			this.right = null;
+			this.counter = 1;
 			
 		}	
 		//Methods
@@ -23,6 +23,12 @@ public class Node {
 		}
 		public void setData(String data){
 			this.data = data;
+		}
+		public int getCounter(){	
+			return this.counter;
+		}
+		public void setCounter(int counter){
+			this.counter = counter;
 		}
 		public Node getRight(){
 			return this.right;

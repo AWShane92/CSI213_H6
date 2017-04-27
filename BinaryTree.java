@@ -11,23 +11,45 @@ public class BinaryTree {
 			root = newLeaf;
 		}	
 		else{
-			
+	
 			Node temp = root;
+			boolean isLeaf = false;
 			
-			while(this.inTree(newLeaf)==false){
+			while(temp != null){
 				
+				
+			
 				if((temp.compareTo(newLeaf) > 0)&&(temp.getLeft() == null)){		
 					temp.setLeft(newLeaf);
+					isLeaf = true;
 				}
-				if((temp.compareTo(newLeaf) < 0)&&(temp.getRight() == null)){
+				else if((temp.compareTo(newLeaf) < 0)&&(temp.getRight() == null)){
 					temp.setRight(newLeaf);
+					isLeaf = true;
+				}
+				else {
+					temp.setCounter(temp.getCounter() + 1);
+					isLeaf = true;
 				}
 				
 				temp = nextLeaf(temp,newLeaf);
 			}
 			
-		}
+		}	
+			
+	}
+	public Node nextLeaf(Node temp, Node leaf){
 		
+		if(temp == null){
+			return temp;
+		}	
+		else if(temp.compareTo(leaf) < 0){
+			temp = temp.getLeft();		
+		}
+		else if(temp.compareTo(leaf) > 0){		
+			temp = temp.getRight();
+		}
+		return temp;
 	}
 	public void delete(Node deleteLeaf){
 		
@@ -44,20 +66,9 @@ public class BinaryTree {
 				return member;
 			}
 			
-		temp =	nextLeaf(temp,leaf);
-					
+		temp =	nextLeaf(temp,leaf);			
 		}
 		return member;
-	}
-	public Node nextLeaf(Node temp, Node leaf){
-		
-		if(temp.compareTo(leaf) > 0){
-			temp = temp.getLeft();		
-		}
-		if(temp.compareTo(leaf)< 0){		
-			temp = temp.getRight();
-		}
-		return temp;
 	}
 	
 	public void printTree(){
