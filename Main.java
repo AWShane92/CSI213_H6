@@ -25,15 +25,19 @@ public class Main {
 		while(wfh.hasNext()){
 			String s = wfh.next();	
 			Node leaf = new Node(s);
-			/*leaves[i] = leaf;
-			i++;
-			*/
-			System.out.println(leaf.getData());
-			bst.add(leaf);
+			//System.out.println(leaf.getData());
+			bst.insert(leaf);
 			
 		}
 	}
-	
-	
+	System.out.println(" ");
+	bst.printTree();
+	System.out.println(" ");
+	if(bst.search("that") == null){
+		System.out.println("Node not found");	
+		}
+	else{
+		System.out.println("Node found");
+		}
 	}
 }

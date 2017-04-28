@@ -1,79 +1,93 @@
 package H6;
 
+import Lab10.BSTNode;
+
 public class BinaryTree {
 	
 	private Node root;
 	private int edges;
 	
-	public void add(Node newLeaf){
-		
-		if(root == null){		
-			root = newLeaf;
-		}	
+	public Node getRoot(){
+		return this.root;
+	}
+
+	//Methods used to Insert using recursion
+	public void insert(Node leaf){
+		if(this.isEmpty()){
+			root = leaf;
+			root.setCounter();
+		}else{	
+		insert(root,leaf);
+		}
+	}
+	public void insert(Node tree, Node leaf){
+
+    	if(tree.compareTo(leaf) > 0){
+    		if(tree.getLeft() == null){
+    			tree.setLeft(leaf);
+    		}
+    		insert(tree.getLeft(),leaf);
+    	}
+    	 if(tree.compareTo(leaf) < 0){
+    		 if(tree.getRight() == null){
+    			 tree.setRight(leaf);
+    		 }
+    		insert(tree.getRight(),leaf);
+    	}
+    	 if(tree.compareTo(leaf)==0){
+    		 tree.setCounter();
+    	 }
+	}
+	public Node search(String data){
+			
+		if(this.isEmpty()){ 
+			return null;
+		}
 		else{
-	
 			Node temp = root;
-			boolean isLeaf = false;
-			
 			while(temp != null){
-				
-				
 			
-				if((temp.compareTo(newLeaf) > 0)&&(temp.getLeft() == null)){		
-					temp.setLeft(newLeaf);
-					isLeaf = true;
+				if(temp.getData().compareToIgnoreCase(data) == 0){
+					return temp;
 				}
-				else if((temp.compareTo(newLeaf) < 0)&&(temp.getRight() == null)){
-					temp.setRight(newLeaf);
-					isLeaf = true;
+				else if(temp.getData().compareToIgnoreCase(data) > 0){
+					temp = temp.getLeft();
 				}
-				else {
-					temp.setCounter(temp.getCounter() + 1);
-					isLeaf = true;
+				else{
+					temp = temp.getRight();
 				}
-				
-				temp = nextLeaf(temp,newLeaf);
 			}
-			
-		}	
-			
-	}
-	public Node nextLeaf(Node temp, Node leaf){
-		
-		if(temp == null){
 			return temp;
-		}	
-		else if(temp.compareTo(leaf) < 0){
-			temp = temp.getLeft();		
 		}
-		else if(temp.compareTo(leaf) > 0){		
-			temp = temp.getRight();
-		}
-		return temp;
 	}
-	public void delete(Node deleteLeaf){
+	public void deleteLeaf(Node deleteLeaf){
 		
 	}
-	public boolean inTree(Node leaf){
-		
-		boolean member = false;
-		Node temp = root;
-		
-		while(temp != null){
-			
-			if(temp == leaf){
-				member = true;
-				return member;
-			}
-			
-		temp =	nextLeaf(temp,leaf);			
-		}
-		return member;
+	public void deleteTree(){
+		root = null;
 	}
-	
+
 	public void printTree(){
 		
+		if(this.isEmpty()){
+			System.out.println("This tree is empty");
+		}
+		else{
+			printTree(root);
+		}
 	}
 	
-
+	public void printTree(Node tree){
+		
+		if(tree != null){
+			printTree(tree.getLeft());
+			tree.print();
+			printTree(tree.getRight());
+		}	
+	}
+	
+	public boolean isEmpty(){
+		
+		return root == null;
+	}
 }

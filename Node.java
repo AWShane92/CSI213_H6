@@ -14,7 +14,6 @@ public class Node {
 			this.data = data;
 			this.left = null;
 			this.right = null;
-			this.counter = 1;
 			
 		}	
 		//Methods
@@ -27,8 +26,8 @@ public class Node {
 		public int getCounter(){	
 			return this.counter;
 		}
-		public void setCounter(int counter){
-			this.counter = counter;
+		public void setCounter(){
+			this.counter++;
 		}
 		public Node getRight(){
 			return this.right;
@@ -45,18 +44,15 @@ public class Node {
 		//Prints node's ID and data. 
 		public void print(){
 			
-			System.out.println("This data is: "+ this.data);
+			System.out.println(this.data +" "+this.counter);
 		}
 		//Compares the data of one node to another node. 
 		public int compareTo(Node node){
 			
-			return this.data.compareTo(node.getData());
+			return this.data.compareToIgnoreCase(node.getData());
 		}
 		
-		public boolean isLeaf(){
-			
-			return (this.right != null) || (this.left != null);
-		}
+		
 		
 
 }
