@@ -28,9 +28,9 @@ public class Main {
 	}
 	
 	System.out.println("Finished loading words...");
-	//bst.printTree();
-	
-	
+	bst.printTree();
+	System.out.println(" ");
+
 	if(bst.search("that") == null){
 		System.out.println("Node not found");	
 		}
@@ -38,10 +38,12 @@ public class Main {
 		System.out.println("Node found");
 		}
 	System.out.println(" ");
+	System.out.println("DELETING MY FIRST WORD!!!!!! ");
 	bst.deleteLeaf("wholly");
 	bst.printTree();
 	System.out.println(" ");
-	bst.remove("whole");
+	System.out.println("DELETING MY SECOND WORD!!!!!! ");
+	bst.remove("while");
 	bst.printTree();
 	}
 }
