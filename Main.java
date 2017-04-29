@@ -4,40 +4,44 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-
-	private static int wordCount;
-	private static Node [] leaves = new Node[15];
 	
 	public static void main(String[]args){
 	
+		System.out.println("Starting program...");
+		
 	//Import file using scanner object. 
-	Scanner wordFrequencyHistogram = null;
-	BinaryTree bst = new BinaryTree();
-	int i = 0;
+		String filename = "/Users/akeemshane/Documents/Documents - Akeem’s MacBook Pro/Eclipse/CSI213/src/H6/Histogram.txt";
+		File inFile = new File(filename);
+		BinaryTree bst = new BinaryTree();
 	
 	try{
-		wordFrequencyHistogram = new Scanner(new File("/Users/akeemshane/Documents/Documents - Akeem’s MacBook Pro/Eclipse/CSI213/src/H6/Histogram.txt"));
-	}catch(FileNotFoundException e){
+			Scanner wfh = new Scanner(inFile);
+			while(wfh.hasNext())
+			{
+				String s = wfh.next();
+				bst.insert(new Node(s));		
+			}
+			
+			wfh.close();
+		}catch(FileNotFoundException e){
 		e.printStackTrace();
 	}
-	while(wordFrequencyHistogram.hasNextLine()){
-		Scanner wfh = new Scanner(wordFrequencyHistogram.nextLine());
-		while(wfh.hasNext()){
-			String s = wfh.next();	
-			Node leaf = new Node(s);
-			//System.out.println(leaf.getData());
-			bst.insert(leaf);
-			
-		}
-	}
-	System.out.println(" ");
-	bst.printTree();
-	System.out.println(" ");
+	
+	System.out.println("Finished loading words...");
+	//bst.printTree();
+	
+	
 	if(bst.search("that") == null){
 		System.out.println("Node not found");	
 		}
 	else{
 		System.out.println("Node found");
 		}
+	System.out.println(" ");
+	bst.deleteLeaf("wholly");
+	bst.printTree();
+	System.out.println(" ");
+	bst.remove("whole");
+	bst.printTree();
 	}
 }
