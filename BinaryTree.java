@@ -1,11 +1,14 @@
 package H6;
 
+import java.util.ArrayList;
+
 import Lab10.BSTNode;
 
 public class BinaryTree {
 	
 	private Node root;
-	private int edges;
+	
+	private int size;
 	
 	public Node getRoot(){
 		return this.root;
@@ -13,9 +16,11 @@ public class BinaryTree {
 
 	//Methods used to Insert using recursion
 	public void insert(Node leaf){
+		
 		if(this.isEmpty()){
 			root = leaf;
 			root.count();
+			size++;
 			}else{	
 			Node insert = root;
 			
@@ -38,6 +43,7 @@ public class BinaryTree {
 					{
 						Node newNode = new Node(leaf.getData(), insert);
 						insert.setRight(newNode);
+						size++;
 					}
 					else
 					{
@@ -55,6 +61,7 @@ public class BinaryTree {
 					{
 						Node newNode = new Node(leaf.getData(), insert);
 						insert.setLeft(newNode);
+						size++;
 					}
 					else
 					{
@@ -105,10 +112,12 @@ public class BinaryTree {
 				if(delete.getParent().getLeft() == delete)
 				{
 					delete.getParent().setLeft(null);
+					size--;
 				}
 				else
 				{
 					delete.getParent().setRight(null);
+					size--;
 				}
 			}
 			//If delete has has a left child, delete's parent's left is now that child
@@ -117,10 +126,12 @@ public class BinaryTree {
 				if(delete.getParent().getLeft() == delete)
 				{
 					delete.getParent().setLeft(delete.getLeft());
+					size--;
 				}
 				else
 				{
 					delete.getParent().setRight(delete.getLeft());
+					size--;
 				}
 			}
 			//if delete has a right child, delete's parent's left is now that child
@@ -129,13 +140,15 @@ public class BinaryTree {
 				if(delete.getParent().getLeft() == delete)
 				{
 					delete.getParent().setLeft(delete.getRight());
+					size--;
 				}
 				else
 				{
 					delete.getParent().setRight(delete.getRight());
+					size--;
 				}
 			}
-			/*If delete has two children uses findMinium to search for the 
+			/*If delete has two children uses findMinimum to search for the 
 			 * smallest data of the left sub tree of the 
 			 * node that is intended to be deleted, sends the data of 
 			 * the node to that minimum node and then deletes that 
@@ -151,10 +164,12 @@ public class BinaryTree {
 				if(minimum.getParent().getLeft() == minimum)
 				{
 					minimum.getParent().setLeft(null);
+					size--;
 				}
 				else
 				{
 					minimum.getParent().setRight(null);
+					size--;
 				}
 			}
 		}
@@ -176,10 +191,12 @@ public class BinaryTree {
 				if(delete.getParent().getLeft() == delete)
 				{
 					delete.getParent().setLeft(null);
+					size--;
 				}
 				else
 				{
 					delete.getParent().setRight(null);
+					size--;
 				}
 			}
 			else if(delete.getLeft() != null && delete.getRight() == null)
@@ -187,10 +204,12 @@ public class BinaryTree {
 				if(delete.getParent().getLeft() == delete)
 				{
 					delete.getParent().setLeft(delete.getLeft());
+					size--;
 				}
 				else
 				{
 					delete.getParent().setRight(delete.getLeft());
+					size--;
 				}
 			}
 			else if(delete.getLeft() == null && delete.getRight() != null)
@@ -198,14 +217,26 @@ public class BinaryTree {
 				if(delete.getParent().getLeft() == delete)
 				{
 					delete.getParent().setLeft(delete.getRight());
+					size--;
 				}
 				else
 				{
 					delete.getParent().setRight(delete.getRight());
+					size--;
 				}
 			}
 			else
 			{
+				//If delete is the root node
+				if(delete==root){
+					
+					Node max = findMaximum(delete.getLeft());
+					
+						max.setRight(delete.getRight());
+						root = delete.getLeft();	
+						size--;
+				}
+				else{
 				/*If delete has two children uses findMaximum to find the maximum
 				 * value of delete's left sub tree, then sets delete's right subtree
 				 * to the right of the max value of the left subtree, then sets
@@ -216,13 +247,16 @@ public class BinaryTree {
 				if(delete.getParent().getLeft() == delete){
 					
 					max.setRight(delete.getRight());
-					delete.getParent().setLeft(delete.getLeft());	
+					delete.getParent().setLeft(delete.getLeft());
+					size--;
 				}
 				else{
 					max.setRight(delete.getRight());
 					delete.getParent().setRight(delete.getLeft());
-				}	
-			}
+					size--;
+					}	
+				}
+			}	
 		}			
 	}
 	public void deleteTree(){
@@ -233,6 +267,7 @@ public class BinaryTree {
 		
 		if(this.isEmpty()){
 			System.out.println("This tree is empty");
+			return;
 		}
 		else{
 			printTree(root);
@@ -246,9 +281,12 @@ public class BinaryTree {
 			tree.print();
 			printTree(tree.getRight());
 		}	
-	}	
+	}
 	public boolean isEmpty(){
 		return root == null;
+	}
+	public int getSize(){
+		return this.size;
 	}
 	//Uses recursion to find the minimum value of a subtree
 	public Node findMinimum(Node node){

@@ -9,9 +9,10 @@ public class Main {
 	
 		System.out.println("Starting program...");
 		
-	//Import file using scanner object. 
+		//Import file using scanner object. 
 		String filename = "/Users/akeemshane/Documents/Documents - Akeem’s MacBook Pro/Eclipse/CSI213/src/H6/Histogram.txt";
-		File inFile = new File(filename);
+		String newFile = "/Users/akeemshane/Desktop/PracHistogram.txt";
+		File inFile = new File(newFile);
 		BinaryTree bst = new BinaryTree();
 	
 	try{
@@ -29,6 +30,7 @@ public class Main {
 	
 	System.out.println("Finished loading words...");
 	bst.printTree();
+	System.out.println("This Histogram has: "+bst.getSize()+ " words");
 	System.out.println(" ");
 
 	if(bst.search("that") == null){
@@ -39,11 +41,14 @@ public class Main {
 		}
 	System.out.println(" ");
 	System.out.println("DELETING MY FIRST WORD!!!!!! ");
-	bst.deleteLeaf("wholly");
+	bst.deleteLeaf("a");
 	bst.printTree();
+	System.out.println("This Histogram has: "+bst.getSize()+ " words");
 	System.out.println(" ");
 	System.out.println("DELETING MY SECOND WORD!!!!!! ");
-	bst.remove("while");
+	bst.remove("sentence");
 	bst.printTree();
+	System.out.println("This Histogram has: "+bst.getSize()+ " words");
+	
 	}
 }

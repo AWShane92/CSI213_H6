@@ -1,5 +1,7 @@
 package H6;
 
+import java.util.*;
+
 public class Node {
 	
 	//Properties
